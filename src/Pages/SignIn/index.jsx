@@ -1,4 +1,6 @@
+import { MainLayout } from '../../Components/MainLayout'
+
 function SignIn() {
-  return <div className="bg-red-400">Sign In</div>
+  return <MainLayout>Sign In</MainLayout>
 }
 export { SignIn }

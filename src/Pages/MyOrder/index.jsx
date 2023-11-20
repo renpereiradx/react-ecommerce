@@ -1,4 +1,4 @@
-import { MainLayout } from '../../components/MainLayout'
+import { MainLayout } from '../../Components/MainLayout'
 
 function MyOrder() {
   return <MainLayout>My Order</MainLayout>

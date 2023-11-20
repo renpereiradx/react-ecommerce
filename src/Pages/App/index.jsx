@@ -6,11 +6,11 @@ import { MyOrder } from '../MyOrder'
 import { MyOrders } from '../MyOrders'
 import { NotFound } from '../NotFound'
 import { SignIn } from '../SignIn'
-import { Navbar } from '../../components/Navbar'
+import { Navbar } from '../../Components/Navbar'
 
 function AppRoutes() {
   let routes = useRoutes([
-    { path: '/', element: <Home /> },
+    { index: true, element: <Home /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },

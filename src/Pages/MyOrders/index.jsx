@@ -1,4 +1,6 @@
+import { MainLayout } from '../../Components/MainLayout'
+
 function MyOrders() {
-  return <div className="bg-red-400">My Orders</div>
+  return <MainLayout>My Orders</MainLayout>
 }
 export { MyOrders }

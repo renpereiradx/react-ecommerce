@@ -1,4 +1,6 @@
+import { MainLayout } from '../../Components/MainLayout'
+
 function NotFound() {
-  return <div className="bg-red-400">Not Found</div>
+  return <MainLayout>Not Found</MainLayout>
 }
 export { NotFound }

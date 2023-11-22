@@ -91,7 +91,11 @@ function Navbar() {
             <NavLink
               to={item.to}
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            ></NavLink>
+            >
+              {item.to === '/cart'
+                ? `${item.text} ${countContext.count}`
+                : item.text}
+            </NavLink>
           </li>
         ))}
       </ul>

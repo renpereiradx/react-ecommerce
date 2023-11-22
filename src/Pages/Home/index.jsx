@@ -10,7 +10,6 @@ function Home() {
       try {
         const response = await fetch(`${urlAPI}/products`)
         const data = await response.json()
-        console.log(data[0].title)
         setItems(data)
       } catch (error) {
         console.log(`Rayos, ha ocurrido un error: ${error}`)
@@ -22,7 +21,7 @@ function Home() {
   return (
     <MainLayout>
       Home
-      <section>
+      <section className='grid grid-cols-4 gap-4 w-full max-w-screen-lg'>
         {items?.map(item => (
           <Card key={item.id} data={item} />
         ))}

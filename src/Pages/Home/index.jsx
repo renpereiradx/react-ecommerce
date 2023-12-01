@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { MainLayout } from '../../Components/MainLayout'
 import { Card } from '../../Components/Card'
 import { urlAPI } from '../../API'
+import { ProductDetail } from '../../Components/ProductDetail'
 
 function Home() {
   const [items, setItems] = useState(null)
@@ -25,8 +26,8 @@ function Home() {
         {items?.map(item => (
           <Card key={item.id} data={item} />
         ))}
-        <Card />
       </section>
+      <ProductDetail />
     </MainLayout>
   )
 }

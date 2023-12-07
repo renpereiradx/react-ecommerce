@@ -4,7 +4,7 @@ function OrderCard(props) {
   return (
     <div className='flex justify-between items-center mb-3.5'>
       <div className='flex items-center gap-2'>
-        <figure className='w-20 h-20'>
+        <figure className='w-16 h-16'>
           <img
             className='w-full h-full rounded-lg object-cover'
             src={imgUrl}

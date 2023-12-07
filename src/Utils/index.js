@@ -3,8 +3,8 @@
  * @param {array} products cartProducts: Array of objects
  * @returns {number} Total price
  */
-export const totalPrice = product => {
+export const totalPrice = products => {
   let sum = 0
-  product.map(product => (sum += product.price))
+  products.map(product => (sum += product.price))
   return sum
 }

@@ -9,6 +9,8 @@ function CheckoutSideMenu() {
     closeCheckoutSideMenu,
     cartProducts,
     setCartProducts,
+    order,
+    setOrder,
   } = useContext(ShoppingCartContext)
 
   const handleDelete = id => {
@@ -16,11 +18,22 @@ function CheckoutSideMenu() {
     setCartProducts(filteredProducts)
   }
 
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: '7.12.23',
+      products: cartProducts,
+      totalProducts: cartProducts.length,
+      totalPrice: totalPrice(cartProducts),
+    }
+    setOrder([...order, orderToAdd])
+    setCartProducts([])
+  }
+
   return (
     <aside
       className={`${
         isCheckoutSideMenuOpen ? 'flex' : 'hidden'
-      } flex-col fixed top-[68px] right-1 w-[360px] h-[calc(100vh-80px)] overflow-y-scroll border border-black rounded-lg bg-white`}
+      } flex-col fixed top-[68px] right-1 w-[360px] h-[calc(100vh-80px)] border border-black rounded-lg bg-white`}
     >
       <div className='flex justify-between items-center p-6'>
         <h2 className='font-medium text-xl'>My Order</h2>
@@ -41,7 +54,7 @@ function CheckoutSideMenu() {
           </svg>
         </button>
       </div>
-      <div className='px-6'>
+      <div className='flex-1 px-6 overflow-y-scroll'>
         {cartProducts?.map(product => (
           <OrderCard
             key={product.id}
@@ -53,13 +66,19 @@ function CheckoutSideMenu() {
           />
         ))}
       </div>
-      <div className='fixed bottom-0 px-6'>
-        <p className='flex justify-between items-center'>
+      <div className='mb-6 px-6'>
+        <p className='flex justify-between items-center mb-2'>
           <span className='font-light'>Total:</span>
           <span className='font-medium text-2xl'>
             ${totalPrice(cartProducts)}
           </span>
         </p>
+        <button
+          className='bg-black py-3 text-white w-full rounded-lg'
+          onClick={() => handleCheckout()}
+        >
+          CHECKOUT
+        </button>
       </div>
     </aside>
   )

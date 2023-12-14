@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+import { urlAPI } from '../API'
 
 export const ShoppingCartContext = createContext()
 
@@ -19,6 +20,34 @@ function ShoppingCartProvider({ children }) {
   const [cartProducts, setCartProducts] = useState([])
   // Shopping Cart - Order
   const [order, setOrder] = useState([])
+  // Get Products
+  const [items, setItems] = useState(null)
+  const [filteredItems, setFilteredItems] = useState(null)
+  // Get Products By Title
+  const [searchByTitle, setSearchByTitle] = useState(null)
+  // Get Products from API
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(`${urlAPI}/products`)
+        const data = await response.json()
+        setItems(data)
+      } catch (error) {
+        console.log(`Rayos, ha ocurrido un error: ${error}`)
+      }
+    }
+    fetchItems()
+  }, [])
+
+  const filteredItemsByTitle = (items, searchByTitle) =>
+    items?.filter(item =>
+      item.title.toLowerCase().includes(searchByTitle.toLowerCase())
+    )
+
+  useEffect(() => {
+    if (searchByTitle)
+      setFilteredItems(filteredItemsByTitle(items, searchByTitle))
+  }, [items, searchByTitle])
 
   return (
     <ShoppingCartContext.Provider
@@ -37,6 +66,11 @@ function ShoppingCartProvider({ children }) {
         closeCheckoutSideMenu,
         order,
         setOrder,
+        items,
+        setItems,
+        searchByTitle,
+        setSearchByTitle,
+        filteredItems,
       }}
     >
       {children}

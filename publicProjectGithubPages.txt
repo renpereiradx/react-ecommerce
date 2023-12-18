@@ -1,0 +1,64 @@
+🚀 Pasos para hacer el deploy en Github 🚀
+ 
+
+Ir a la terminal, cambiar a la rama main (que es la que queremos hacer deploy) :
+
+git checkout main
+ 
+
+En la terminal verificar si en modo de producción funciona la app:
+
+npm run build
+ 
+
+Se va a generar una carpeta llamada dist, para visualizar la app se corre:
+
+npm run preview
+ 
+
+Se abre el navegador y debe salir la app con todas las funciones. 🎉  
+En la terminal ejecutar:
+
+npm install gh-pages --save-dev
+ 
+
+Vamos a VS Code y abrimos el archivo package.json, antes del cierre de la última llave, se agrega:
+
+"homepage": "https://nombre_usuario.github.io/nombre_repositorio/"
+ 
+
+En la parte de los scripts se agrega "deploy": "gh-pages -d dist" queda así:
+
+"scripts": {
+	"dev": "vite",
+	"build": "vite build",
+	"lint": "eslint src --ext js,jsx --report-unused-disable-directives --
+	max-warnings 0",
+	"preview": "vite preview",
+	"predeploy": "npm run build",
+	"deploy": "gh-pages -d dist"
+},
+ 
+
+Abrimos el archivo vite.congig.js y agregamos base: "./", el código queda:
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+	plugins: [react()],
+	base: "./",
+})
+ 
+
+Guardamos, y en la terminal ejecutamos:
+
+npm run deploy
+ 
+
+Si sale Published es que todo salió bien. ✅  
+Vamos al repositorio en GitHub. En la página de GitHub, al recargarla, en la lista desplegable de las ramas deben salir al menos las ramas main y gh-pages.  
+Vamos a la pestaña de “Settings”, luego en el panel izquierdo en la pestaña de “Pages”, en las opciones de “Branch” ya la herramienta que instalamos de gh-pages seleccionó por nosotros la opción de la rama gh-pages y la carpeta raíz: /root.  
+Después de unos minutos debe aparecer la dirección del despliegue. 🙏  
+Al entrar a la url, debe estar el proyecto funcionando, probar con todas las funciones. ✌️  

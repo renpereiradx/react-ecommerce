@@ -16,26 +16,34 @@ let menuLeft = [
   {
     to: '/clothes',
     text: 'Clothes',
+    category: 'clothes',
     className: '',
   },
   {
     to: '/electronics',
     text: 'Electronics',
+    category: 'electronics',
     className: '',
   },
   {
     to: '/furnitures',
     text: 'Furnitures',
+    category: 'furniture',
     className: '',
   },
   {
     to: '/toys',
     text: 'Toys',
+    category: 'toys',
     className: '',
   },
   {
     to: '/others',
     text: 'Others',
+    category: 'others',
+    onclick: function () {
+      context.setSearchByCategory('others')
+    },
     className: '',
   },
 ]
@@ -84,7 +92,7 @@ let menuRight = [
 ]
 
 function Navbar() {
-  const { count } = useContext(ShoppingCartContext)
+  const context = useContext(ShoppingCartContext)
   const activeStyle = 'underline underline-offset-4'
 
   return (
@@ -92,14 +100,29 @@ function Navbar() {
       <ul className='flex items-center gap-3'>
         {menuLeft.map((item, index) => (
           <li key={item.text} className={item.className}>
-            <NavLink
-              to={item.to}
-              className={({ isActive }) =>
-                isActive && index !== 0 ? activeStyle : undefined
-              }
-            >
-              {item.text}
-            </NavLink>
+            {item.category ? (
+              <NavLink
+                to={item.to}
+                onClick={() =>
+                  context.setSearchByCategory(item.category.toLowerCase())
+                }
+                className={({ isActive }) =>
+                  isActive && index !== 0 ? activeStyle : undefined
+                }
+              >
+                {item.text}
+              </NavLink>
+            ) : (
+              <NavLink
+                to={item.to}
+                onClick={() => context.setSearchByCategory()}
+                className={({ isActive }) =>
+                  isActive && index !== 0 ? activeStyle : undefined
+                }
+              >
+                {item.text}
+              </NavLink>
+            )}
           </li>
         ))}
       </ul>
@@ -114,7 +137,7 @@ function Navbar() {
                 <>
                   <div className='flex items-center'>
                     <div>{item.content}</div>
-                    <div>{count}</div>
+                    <div>{context.cartProducts.length}</div>
                   </div>
                 </>
               ) : (

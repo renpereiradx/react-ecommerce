@@ -6,13 +6,13 @@ import { totalPrice } from '../../Utils'
 
 function CheckoutSideMenu() {
   const {
-    setCount,
     isCheckoutSideMenuOpen,
     closeCheckoutSideMenu,
     cartProducts,
     setCartProducts,
     order,
     setOrder,
+    setSearchByTitle,
   } = useContext(ShoppingCartContext)
 
   const handleDelete = id => {
@@ -29,8 +29,8 @@ function CheckoutSideMenu() {
     }
     setOrder([...order, orderToAdd])
     setCartProducts([])
-    setCount()
     closeCheckoutSideMenu()
+    setSearchByTitle(null)
   }
 
   return (

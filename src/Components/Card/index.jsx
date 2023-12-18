@@ -3,8 +3,6 @@ import { ShoppingCartContext } from '../../Context'
 
 function Card(data) {
   const {
-    count,
-    setCount,
     openProductDetail,
     closeProductDetail,
     setProductToShow,
@@ -20,7 +18,6 @@ function Card(data) {
 
   const addProductsCart = (e, productData) => {
     e.stopPropagation()
-    setCount(count + 1)
     setCartProducts([...cartProducts, productData])
     openCheckoutSideMenu()
     closeProductDetail()

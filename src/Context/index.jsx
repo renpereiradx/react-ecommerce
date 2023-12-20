@@ -81,11 +81,12 @@ function ShoppingCartProvider({ children }) {
       )
     if (!searchByTitle && !searchByCategory)
       setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
-    return () => {
-      setSearchByTitle(null)
-      setSearchByCategory(null)
-    }
+    // return () => {
+    //   setSearchByTitle(null)
+    //   setSearchByCategory(null)
+    // }
   }, [items, searchByTitle, searchByCategory])
+  console.log(filteredItems)
 
   return (
     <ShoppingCartContext.Provider
